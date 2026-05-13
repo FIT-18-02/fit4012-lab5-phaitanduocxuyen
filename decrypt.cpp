@@ -199,7 +199,7 @@ int main() {
 	unsigned char expandedKey[176];
 
 	KeyExpansion(key, expandedKey);
-	
+
 	int messageLen = strlen((const char *)encryptedMessage);
 
 	unsigned char * decryptedMessage = new unsigned char[messageLen];

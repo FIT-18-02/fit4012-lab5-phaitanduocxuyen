@@ -194,24 +194,9 @@ int main() {
 
 	KeyExpansion(key, expandedKey);
 
-	// --- BẮT ĐẦU ĐOẠN SỬA CBC ---
-    unsigned char iv[16] = {0}; // Vector khởi tạo
-    unsigned char previous_block[16];
-    memcpy(previous_block, iv, 16);
-
-    for (int i = 0; i < paddedMessageLen; i += 16) {
-        unsigned char xor_result[16];
-
-        // 1. XOR khối plaintext hiện tại với khối ciphertext trước đó (hoặc IV)
-        xor_blocks(paddedMessage + i, previous_block, xor_result);
-
-        // 2. Mã hóa khối đã XOR
-        AESEncrypt(xor_result, expandedKey, encryptedMessage + i);
-
-        // 3. Cập nhật previous_block bằng chính khối ciphertext vừa tạo
-        memcpy(previous_block, encryptedMessage + i, 16);
-    }
-    // --- KẾT THÚC ĐOẠN SỬA ---
+	for (int i = 0; i < paddedMessageLen; i += 16) {
+		AESEncrypt(paddedMessage+i, expandedKey, encryptedMessage+i);
+	}
 
 	cout << "Encrypted message in hex:" << endl;
 	for (int i = 0; i < paddedMessageLen; i++) {

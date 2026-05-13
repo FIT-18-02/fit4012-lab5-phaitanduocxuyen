@@ -249,3 +249,9 @@ void KeyExpansion(unsigned char inputKey[16], unsigned char expandedKeys[176]) {
 }
 
 #endif /* STRUCTURES_H */
+
+inline void xor_blocks(unsigned char* a, unsigned char* b, unsigned char* out) {
+    for (int i = 0; i < 16; i++) {
+        out[i] = a[i] ^ b[i];
+    }
+}
